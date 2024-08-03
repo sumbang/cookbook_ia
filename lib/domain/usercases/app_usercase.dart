@@ -1,11 +1,13 @@
 import 'package:cookbook_ia/data/models/requests/account_request.dart';
 import 'package:cookbook_ia/data/models/requests/login_request.dart';
+import 'package:cookbook_ia/data/models/requests/recipe_request.dart';
 import 'package:cookbook_ia/data/models/requests/reset_request.dart';
 import 'package:cookbook_ia/data/models/requests/signup_request.dart';
 import 'package:cookbook_ia/data/repositories/app_repository_impl.dart';
 import 'package:cookbook_ia/domain/entities/account.dart';
 import 'package:cookbook_ia/domain/entities/login.dart';
 import 'package:cookbook_ia/domain/entities/message.dart';
+import 'package:cookbook_ia/domain/entities/recipe.dart';
 import 'package:cookbook_ia/domain/repositories/app_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,6 +41,18 @@ class AppUsercase {
 
     Future<Account> getAccount() {
       return _repository.getAccount();
+    }
+
+    Future<Message> setRecipe(RecipeRequest recipeRequest) {
+      return _repository.setRecipe(data: recipeRequest);
+    }
+
+    Future<List<Recipe>> getRecipe() {
+      return _repository.getRecipe();
+    }
+
+    Future<Message> deleteRecipe(Recipe recipeRequest) {
+      return _repository.deleteRecipe(data: recipeRequest);
     }
 
 } 

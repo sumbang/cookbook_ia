@@ -44,6 +44,7 @@
  "photo_place1": "Photo gallery",
  "photo_place2": "Camera",
  "txt_bt_search": "Generate",
+ "txt_search": "Search",
  "photo1_title": "Take photo via?",
  "photo2_title": "Photo gallery",
  "cancel_title": "Close",
@@ -75,7 +76,7 @@
  "txt_context": "Enter your details here",
  "txt_alergies": "List of your food allergies",
  "txt_gastro": "Your gastronomic preference",
- "txt_save": "Registration successful", 
+ "txt_save": "Operation successful", 
  "txt_cuisine1": "Asian cuisine",
  "txt_cuisine2": "European cuisine",
  "txt_cuisine3": "African cuisine",
@@ -91,5 +92,13 @@
  "txt_prompt3": "Identify the cooking dish in the image and tell me if there are any risks for me. I am allergic to the following foods: @param_allergie",
  "txt_prompt_content3": "Imagine telling a person if there is a risk that he or she is allergic to a food or not. Each time you receive a photo, you will have to analyze the image and detect the dish in question , on the basis of the allergies that will be given to you, you will have to be able to say whether the dish that you have been given presents any risks and highlight the allergies in question. You will have to do a probability calculation, if there are any. a probability of at least 30% of the appearance of an allergy you must report In the case where the dish does not present any allergy, you must say an answer like 'the dish is healthy for you', otherwise you must. have answers like: 'there is x% probability that this dish contains peanuts for example or x is the probability rate' If the image provided does not correspond to a cooking dish, produces an answer. like: 'I am an AI for cooking recipes, please provide an image of a cooking dish. Your answer must be a valid Json with the following properties: If you cannot find an allergy, a message property that will contain your answer, a status property that will have a value of 2, a content property that will be an empty array. If you need more details, a message property that will contain your answer, a status property that will have a value of 3, a content property that will be an empty array. If you manage to find an allergy, a status property with a value of 1, a message property will have an empty value and a content property that will be an array containing all the allergies that you have found, each allergy being an element of the array with the following properties: a name property for the allergy, a percent property that will be the probability rate of the allergy. ",
  "txt_prompt4": "Identifies the wish that is made here: @param_souhait and suggests recipes that go in this direction, a maximum of 5 recipes. Consider that I have a preference for @favorite_food and that I have allergies to the following foods: @param_allergie",
- "txt_prompt_content4": "Imagine that you guide a person to cook, based on an idea of ​​what the person wants to eat, you must generate cooking recipes. For each recipe, breaks down each cooking step in detail, starting with the ingredients needed and explaining cooking techniques, for example: 'Mix 250 g of flour with 2 eggs and 200 ml of milk to prepare the pancake batter.' If the idea submitted is not related to the generation of cooking recipes, produce a response like: 'I am an AI for cooking recipes, please provide foods for a recipe.'. Your response must be a valid Json with the following properties: If you are unable to provide recipes, a message property that will contain your response, a status property that will have a value of 2, a content property that will be an empty array. If you need more details, a message property that will contain your response, a status property that will have a value of 3, a content property that will be an empty array. If you are able to provide the recipes, a status property with a value of 1, a message property that will have an empty value and a content property that will be an array containing all the recipes that you have generated, each recipe being an element of the array with the following properties: a name property for the name of the recipe, an ingredients property that will be an array with all the ingredients, an instructions property that will be an array with all the instructions to make the recipe. "
+ "txt_prompt_content4": "Imagine that you guide a person to cook, based on an idea of ​​what the person wants to eat, you must generate cooking recipes. For each recipe, breaks down each cooking step in detail, starting with the ingredients needed and explaining cooking techniques, for example: 'Mix 250 g of flour with 2 eggs and 200 ml of milk to prepare the pancake batter.' If the idea submitted is not related to the generation of cooking recipes, produce a response like: 'I am an AI for cooking recipes, please provide foods for a recipe.'. Your response must be a valid Json with the following properties: If you are unable to provide recipes, a message property that will contain your response, a status property that will have a value of 2, a content property that will be an empty array. If you need more details, a message property that will contain your response, a status property that will have a value of 3, a content property that will be an empty array. If you are able to provide the recipes, a status property with a value of 1, a message property that will have an empty value and a content property that will be an array containing all the recipes that you have generated, each recipe being an element of the array with the following properties: a name property for the name of the recipe, an ingredients property that will be an array with all the ingredients, an instructions property that will be an array with all the instructions to make the recipe. ",
+ "txt_recipe1": "Ingredients", 
+ "txt_recipe2": "Instructions",
+ "txt_recipe3": "CookBook IA",
+ "txt_backup": "Save",
+ "txt_share": "Share",
+ "txt_close": "Are you sure you want to leave this page ?", 
+ "txt_aliment": "Aliment : ",
+ "txt_prob": "probalité : "
 }

@@ -83,7 +83,7 @@ class SearchAllergiesScreenState extends ConsumerState<SearchAllergiesScreen> {
           });
         });
 
-        promptRequest.replaceAll("param_allergie",allergies);
+        promptRequest.replaceAll("@param_allergie",allergies);
 
         if(detail)  {
           promptRequest = promptRequest + " "+contextController.text.toString();

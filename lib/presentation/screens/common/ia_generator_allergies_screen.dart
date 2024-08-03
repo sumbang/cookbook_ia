@@ -1,31 +1,21 @@
 import 'package:cookbook_ia/core/setting.dart';
 import 'package:cookbook_ia/data/models/responses/allergy_response.dart';
+import 'package:cookbook_ia/presentation/components/widgets/allergy.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class IaGeneratorAllergiesScreen extends StatelessWidget {
+class IaGeneratorAllergiesScreen extends StatefulHookConsumerWidget {
 
   final List<AllergyResponse> allergies;
   IaGeneratorAllergiesScreen(this.allergies);
-
-  @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-          body: IaGeneratorAllergiesScreen1(allergies)
-          );
-  }
-}
-
-class IaGeneratorAllergiesScreen1 extends StatefulWidget {
-
-  final List<AllergyResponse> allergies;
-  IaGeneratorAllergiesScreen1(this.allergies);
 
   @override
   IaGeneratorAllergiesScreenState createState() => IaGeneratorAllergiesScreenState(allergies);
 
 }
 
-class IaGeneratorAllergiesScreenState extends State<IaGeneratorAllergiesScreen1> {
+class IaGeneratorAllergiesScreenState extends ConsumerState<IaGeneratorAllergiesScreen> {
   List<AllergyResponse> allergies;
   IaGeneratorAllergiesScreenState(this.allergies);
 
@@ -46,53 +36,35 @@ class IaGeneratorAllergiesScreenState extends State<IaGeneratorAllergiesScreen1>
   @override
   Widget build(BuildContext context) {
     
-    return  Scaffold( 
+    return  PopScope(
+     canPop: false, 
+      child: Scaffold( 
       backgroundColor: Setting.white,
       key: _scaffoldKey,
-      body : Stack(
-            children: <Widget>[
-              
-              Container(
+      appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.txt_recipe3,  style: TextStyle(color: Colors.white,  fontFamily: 'Candara', fontWeight: FontWeight.bold, fontSize: 18.0), ),
+              backgroundColor: Setting.primaryColor,
+              iconTheme: const IconThemeData(color: Colors.black),
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              onPressed: () { Navigator.of(_scaffoldKey.currentContext!).pop();  },
+              ),
+        ),
+      body :  Container(
                         width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.only(top:100),
                         height: MediaQuery.of(context).size.height,
-                        child :SingleChildScrollView(child : Padding(
+                        child :  SingleChildScrollView(child : Padding(
                                 padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 10),
-                                child:  Container(),)),
+                                child:  Column(
+                                  children: allergies.map((e) => Allergy(allergie: e,)).toList(),
+                                ),)),
                 ),
-
-                Positioned(
-                  top: 50.0,
-                  right: 20.0,
-                  child: Container(
-                    child : Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-
-                          const SizedBox(width: 10,),
-                          
-                          IconButton(
-                                icon: const Icon(
-                                    Icons.close,
-                                    color: Colors.black,
-                                    size: 30,
-                                ), onPressed: () {
-
-                                   Navigator.of(_scaffoldKey.currentContext!).pop();
-                                  
-                          },),
-
-
-                      ],
-                    )
-                  ) 
-                ),
-
-
-            ]
-          
-     ) );
+                
+    ));
 
   }
 

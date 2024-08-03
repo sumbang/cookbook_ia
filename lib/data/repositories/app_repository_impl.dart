@@ -1,11 +1,13 @@
 import 'package:cookbook_ia/data/api/database.dart';
 import 'package:cookbook_ia/data/models/requests/account_request.dart';
 import 'package:cookbook_ia/data/models/requests/login_request.dart';
+import 'package:cookbook_ia/data/models/requests/recipe_request.dart';
 import 'package:cookbook_ia/data/models/requests/reset_request.dart';
 import 'package:cookbook_ia/data/models/requests/signup_request.dart';
 import 'package:cookbook_ia/domain/entities/account.dart';
 import 'package:cookbook_ia/domain/entities/login.dart';
 import 'package:cookbook_ia/domain/entities/message.dart';
+import 'package:cookbook_ia/domain/entities/recipe.dart';
 import 'package:cookbook_ia/domain/repositories/app_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -45,6 +47,21 @@ class AppRepositoryImpl extends AppRepository {
   @override
   Future<Message> setUpdate({required AccountRequest data}) {
     return _remoteDatabase.setUpdateAccount(data).then((value) => value.toEntity());
+  }
+
+  @override
+  Future<List<Recipe>> getRecipe() {
+    return _remoteDatabase.getRecipes().then((value) => value.map((e) => e.toEntity()).toList());
+  }
+
+  @override
+  Future<Message> setRecipe({required RecipeRequest data}) {
+    return _remoteDatabase.setRecipe(data).then((value) => value.toEntity());
+  }
+  
+  @override
+  Future<Message> deleteRecipe({required Recipe data}) {
+    return _remoteDatabase.deleteRecipe(data).then((value) => value.toEntity());
   }
 
 

@@ -1,10 +1,10 @@
 import 'package:cookbook_ia/core/setting.dart';
-import 'package:cookbook_ia/data/models/requests/recipe_request.dart';
-import 'package:cookbook_ia/data/models/responses/recette_response.dart';
 import 'package:cookbook_ia/domain/entities/message.dart';
+import 'package:cookbook_ia/domain/entities/recipe.dart';
 import 'package:cookbook_ia/presentation/components/view_models/app_view_model.dart';
 import 'package:cookbook_ia/presentation/components/widgets/bouton.dart';
 import 'package:cookbook_ia/presentation/components/widgets/item_line.dart';
+import 'package:cookbook_ia/presentation/screens/mobile/bookmarks_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -12,38 +12,29 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_dialog_fork/progress_dialog_fork.dart';
 import 'package:share_plus/share_plus.dart';
 
-class Recipe extends HookConsumerWidget {
+class RecipeBookmarkScreen extends HookConsumerWidget {
 
-  final RecetteResponse recette;
-
-  const Recipe({super.key, required this.recette});
+  final Recipe recette;
 
   _share() {
     Share.share(recette.valueToShare(), subject: recette.name);
   }
 
-  _save(BuildContext context, WidgetRef ref) async {
+  _delete(BuildContext context, WidgetRef ref) async {
 
-      final ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal, isDismissible:false);
-      pr.style(message: AppLocalizations.of(context)!.wait_title);
+    final ProgressDialog pr = ProgressDialog(context,type: ProgressDialogType.Normal, isDismissible:false);
+    pr.style(message: AppLocalizations.of(context)!.wait_title);
     
-      await pr.show();
+    await pr.show();
 
-      RecipeRequest recipeRequest = RecipeRequest(
-        name: recette.name,
-        ingredients: recette.ingredients,
-        instructions: recette.instructions
-      );
-
-      Future<Message> retour = ref.read(appViewModelProvider).setRecipe(recipeRequest);
+    Future<Message> retour = ref.read(appViewModelProvider).deleteRecipe(recette);
       retour.then((result) {
         
         pr.hide().then((isHidden) {
           print(isHidden);
         });
-
-
-      Fluttertoast.showToast(
+        
+        Fluttertoast.showToast(
                   msg: Setting.getDynamicMessage(result.message, context),
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
@@ -52,6 +43,11 @@ class Recipe extends HookConsumerWidget {
                   textColor: Colors.white,
                   fontSize: 16.0
               );
+
+              Navigator.push(context,
+                MaterialPageRoute(
+                  builder: (_) => BookmarksScreen()),
+            );
 
       }).catchError((e) {
 
@@ -72,10 +68,31 @@ class Recipe extends HookConsumerWidget {
 
   }
 
+  RecipeBookmarkScreen({super.key, required this.recette});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context,ref) {
 
-      return   SingleChildScrollView(
+      return  PopScope(
+     canPop: false, 
+      child: Scaffold( 
+      backgroundColor: Setting.white,
+      key: _scaffoldKey,
+      appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.txt_recipe3,  style: TextStyle(color: Colors.white,  fontFamily: 'Candara', fontWeight: FontWeight.bold, fontSize: 18.0), ),
+              backgroundColor: Setting.primaryColor,
+              iconTheme: const IconThemeData(color: Colors.black),
+              elevation: 0,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              onPressed: () { Navigator.of(_scaffoldKey.currentContext!).pop();  },
+              ),
+        ),
+      body : SingleChildScrollView(
               child:  Padding(
               padding: const EdgeInsets.all(2.0),
               child:  Container(
@@ -121,19 +138,17 @@ class Recipe extends HookConsumerWidget {
 
                         const SizedBox(height: 10,),
 
-
-                       Row(children: [
-                          Expanded(flex: 1, child:  Bouton(background: Setting.patientColor, couleur: Setting.white, onTap:() { _save(context, ref); } , texte: AppLocalizations.of(context)!.txt_backup,),),
+                        Row(children: [
+                          Expanded(flex: 1, child:  Bouton(background: Setting.marron, couleur: Setting.white, onTap:() { _delete(context, ref); } , texte: AppLocalizations.of(context)!.pic_3,),),
                           Expanded(flex: 1, child:  Bouton(background: Setting.vertColor, couleur: Setting.white, onTap: _share, texte: AppLocalizations.of(context)!.txt_share,),)
                        ],),
 
 
                         const SizedBox(height: 10,),
-
                         
 
                   ],),
-              )
+              )))
               
       ));
 

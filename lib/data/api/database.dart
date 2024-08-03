@@ -2,11 +2,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cookbook_ia/data/models/requests/account_request.dart';
 import 'package:cookbook_ia/data/models/requests/login_request.dart';
+import 'package:cookbook_ia/data/models/requests/recipe_request.dart';
 import 'package:cookbook_ia/data/models/requests/reset_request.dart';
 import 'package:cookbook_ia/data/models/requests/signup_request.dart';
 import 'package:cookbook_ia/data/models/responses/account_response.dart';
 import 'package:cookbook_ia/data/models/responses/login_response.dart';
 import 'package:cookbook_ia/data/models/responses/message_response.dart';
+import 'package:cookbook_ia/data/models/responses/recipe_response.dart';
+import 'package:cookbook_ia/domain/entities/recipe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -151,6 +154,62 @@ class Database {
       } else {
         return new AccountResponse(allergies: "", preferences: "");
       }
+    }
+
+    Future<MessageResponse> setRecipe(RecipeRequest request) async {
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String uuid = (prefs.getString("id") ?? "");
+      var db = FirebaseFirestore.instance;
+
+      final data = <String, dynamic>{
+        "name": request.name,
+        "ingredients": request.ingredients,
+        "instructions": request.instructions,
+      };
+      
+      db.collection("recipes")
+        .doc(uuid).collection("bookmarks")
+        .doc(request.name)
+        .set(data)
+        .onError((e, _) => print("Error writing document: $e"));
+
+      return new MessageResponse(message: 'txt_save');
+      
+    }
+
+    Future<List<RecipeResponse>> getRecipes() async {
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String uuid = (prefs.getString("id") ?? "");
+      var db = FirebaseFirestore.instance;
+      List<RecipeResponse> recettes = [];
+
+      var collection = db.collection('recipes').doc(uuid).collection('bookmarks');
+      QuerySnapshot querySnapshot = await collection.get();
+      
+      for (var doc in querySnapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        data["id"] = doc.id;
+        recettes.add(RecipeResponse.fromJson(data));
+      }
+
+      return recettes;
+
+    }
+
+    Future<MessageResponse> deleteRecipe(Recipe request) async {
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String uuid = (prefs.getString("id") ?? "");
+      var db = FirebaseFirestore.instance;
+
+      db.collection('recipes').doc(uuid)  
+      .collection('bookmarks').doc(request.id)
+      .delete();
+
+      return new MessageResponse(message: 'txt_save');
+
     }
 
 

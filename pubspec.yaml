@@ -60,9 +60,11 @@ dependencies:
   intl: any
   mime: ^1.0.4
   overlay_support: ^2.1.0
+  page_view_dot_indicator: ^2.3.0
   path: null
   path_provider: ^2.1.3
   progress_dialog_fork: ^1.0.0
+  share_plus: ^9.0.0
   shared_preferences: ^2.2.3
   upgrader: ^10.3.0
 
