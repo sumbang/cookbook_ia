@@ -87,8 +87,6 @@ class GenerateRecipeScreenState extends ConsumerState<GenerateRecipeScreen> {
 
       final prompt = [Content.text(request2)];
       final response = await model!.generateContent(prompt);
-
-      print(response.text!);
       
       final PromptResponse promptResponse = PromptResponse.fromJson(json.decode(response.text!));
 
