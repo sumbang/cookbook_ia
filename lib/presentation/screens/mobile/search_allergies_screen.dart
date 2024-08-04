@@ -39,6 +39,14 @@ class SearchAllergiesScreenState extends ConsumerState<SearchAllergiesScreen> {
   bool detail = false;
 
   Future<void> ia_generotor() async {
+  
+    String allergies = "";
+    Future<Account> retour = ref.read(appViewModelProvider).getAccount();
+        await retour.then((result) { 
+          setState(() {
+            allergies = result.allergies;
+          });
+    });
 
     if(imagepath.text.isEmpty ) {
        Fluttertoast.showToast(
@@ -62,6 +70,17 @@ class SearchAllergiesScreenState extends ConsumerState<SearchAllergiesScreen> {
                   textColor: Colors.white,
                   fontSize: 16.0
               );
+    } else if(allergies.isEmpty) {
+
+       Fluttertoast.showToast(
+                  msg: AppLocalizations.of(context)!.txt_allergie_requis,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
     }
 
     else {
@@ -75,13 +94,6 @@ class SearchAllergiesScreenState extends ConsumerState<SearchAllergiesScreen> {
         XFile imageCompress1 = await imageCompress.exec();
 
         final fichier =  await File(imageCompress1.path).readAsBytes();
-        String allergies = "";
-        Future<Account> retour = ref.read(appViewModelProvider).getAccount();
-        await retour.then((result) { 
-          setState(() {
-            allergies = result.allergies;
-          });
-        });
 
         String request = promptRequest.replaceAll("@param_allergie",allergies);
 

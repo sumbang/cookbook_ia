@@ -4,6 +4,7 @@ import 'package:cookbook_ia/core/sizeconfig.dart';
 import 'package:cookbook_ia/firebase_options.dart';
 import 'package:cookbook_ia/presentation/screens/common/onboarding_screen.dart';
 import 'package:cookbook_ia/presentation/screens/mobile/dashbord_screen.dart';
+import 'package:features_tour/features_tour.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,16 @@ Future<void> myBackgroundHandler(RemoteMessage message) async {
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   setupLocator();
+
+  FeaturesTour.setGlobalConfig(
+    force: true,
+    predialogConfig: PredialogConfig(
+      enabled: false,
+    ),
+    childConfig: ChildConfig(isAnimateChild: false),
+    debugLog: false,
+  );
+
   runApp(
        ProviderScope(child: MyApp())
     );

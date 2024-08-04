@@ -36,6 +36,16 @@ class GenerateRecipeScreenState extends ConsumerState<GenerateRecipeScreen> {
 
   Future<void> ia_generotor() async {
 
+    String allergies = "";
+    String favorites = "";
+    Future<Account> retour = ref.read(appViewModelProvider).getAccount();
+      await retour.then((result) { 
+        setState(() {
+          allergies = result.allergies;
+          favorites = result.preferences;
+        });
+    });
+
     if(itemsController.text.isEmpty ) {
        Fluttertoast.showToast(
                   msg: AppLocalizations.of(context)!.empty_txt,
@@ -58,6 +68,28 @@ class GenerateRecipeScreenState extends ConsumerState<GenerateRecipeScreen> {
                   textColor: Colors.white,
                   fontSize: 16.0
               );
+    } else if(allergies.isEmpty) {
+
+       Fluttertoast.showToast(
+                  msg: AppLocalizations.of(context)!.txt_allergie_requis,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+    } else if(favorites.isEmpty) {
+
+       Fluttertoast.showToast(
+                  msg: AppLocalizations.of(context)!.txt_preference_requis,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
     }
  
     else {  
@@ -66,16 +98,6 @@ class GenerateRecipeScreenState extends ConsumerState<GenerateRecipeScreen> {
       pr.style(message: AppLocalizations.of(context)!.txt_wait);
       
       await pr.show();
-
-      String allergies = "";
-      String favorites = "";
-      Future<Account> retour = ref.read(appViewModelProvider).getAccount();
-      await retour.then((result) { 
-        setState(() {
-          allergies = result.allergies;
-          favorites = result.preferences;
-        });
-      });
 
       String request = promptRequest.replaceAll("@param_souhait",itemsController.text.toString());
       String request1 = request.replaceAll("@favorite_food",favorites);

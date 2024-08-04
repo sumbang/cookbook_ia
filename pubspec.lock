@@ -241,6 +241,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  features_tour:
+    dependency: "direct main"
+    description:
+      name: features_tour
+      sha256: "5b2ae4a092abcf379f17f7d3a01dae5d599f67e0928a63c0b9dd0921db0dae40"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.6"
   ffi:
     dependency: transitive
     description:

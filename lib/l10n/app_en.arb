@@ -75,7 +75,7 @@
  "logout_op2": "No",
  "txt_context": "Enter your details here",
  "txt_alergies": "List of your food allergies",
- "txt_gastro": "Your gastronomic preference",
+ "txt_gastro": "List of your gastronomic preferences, eg: African cuisine...",
  "txt_save": "Operation successful", 
  "txt_cuisine1": "Asian cuisine",
  "txt_cuisine2": "European cuisine",
@@ -100,5 +100,16 @@
  "txt_share": "Share",
  "txt_close": "Are you sure you want to leave this page ?", 
  "txt_aliment": "Aliment : ",
- "txt_prob": "Probability of presence : "
+ "txt_prob": "Probability of presence : ",
+ "txt_tour1_desc": "Find here the menus to see all the recipes you save, manage your account (Change your name, manage your allergies and define your culinary preferences), log out of the application",
+ "txt_tour2_desc": "Provide an image of a dish and you will get various ways to make this dish",
+ "txt_tour3_desc": "Provide a list of foods and you will get various recipes that can be made with these foods",
+ "txt_tour4_desc": "Provide an image of a dish and based on the allergies you have declared, you will be told if the dish is healthy for you",
+ "txt_tour5_desc": "Provide an idea of ​​what you want to cook, you will get various recipes along these lines",
+ "txt_tour_bt1": "Next",
+ "txt_tour_bt2": "Previous",
+ "txt_tour_bt3": "Done",
+ "txt_tour_bt4": "Skip",
+ "txt_allergie_requis": "Please set your allergies via the main menu",
+ "txt_preference_requis": "Please set your culinary preferences via the main menu"
 }

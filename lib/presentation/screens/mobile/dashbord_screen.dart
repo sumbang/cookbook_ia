@@ -12,6 +12,7 @@ import 'package:cookbook_ia/presentation/screens/mobile/find_recipe_screen.dart'
 import 'package:cookbook_ia/presentation/screens/mobile/generate_recipe_screen.dart';
 import 'package:cookbook_ia/presentation/screens/mobile/homepage_screen.dart';
 import 'package:cookbook_ia/presentation/screens/mobile/search_allergies_screen.dart';
+import 'package:features_tour/features_tour.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -119,13 +120,26 @@ class DashbordScreenState extends ConsumerState<DashbordScreen> {
      
   }
 
+  final tourController = FeaturesTourController('App');
+
+  void showFeaturesTour() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool showed = await prefs.getBool("tour") ?? false;
+    if(!showed) {
+      setState(() {
+        prefs.setBool("tour", true);
+      });
+      tourController.start(context);
+    }
+  }
+
   @override
   void initState()  {
     initName();
+    showFeaturesTour();
     super.initState();
   }   
 
-  
 
   @override
   Widget build(BuildContext context) {
@@ -138,41 +152,50 @@ class DashbordScreenState extends ConsumerState<DashbordScreen> {
               elevation: 0,
               leading: Icon(Icons.person_rounded,color: Setting.white, size: 30.0, ),
               actions: [
-                PopupMenuButton<String>(
-                  // Callback that sets the selected popup menu item.
-                  onSelected: (String item) {
-                    if(item == "1") {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => BookmarksScreen()));
-                    }
-                    else if(item == "2") {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => AccountScreen()));
-                    }
-                    else if(item == "3") {
-                      version(context);
-                    }
-                    else if(item == "4") {
-                     deconnexion(context, ref);
-                    }
-                  },
-                  itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                    PopupMenuItem<String>(
-                      value: "1",
-                      child: Text(AppLocalizations.of(context)!.txt_menu2, style: const TextStyle(fontFamily: 'Candara')),
-                    ),
-                    PopupMenuItem<String>(
-                      value: "2",
-                      child: Text(AppLocalizations.of(context)!.txt_menu3, style: const TextStyle(fontFamily: 'Candara')),
-                    ),
-                    PopupMenuItem<String>(
-                      value: "3",
-                      child: Text(AppLocalizations.of(context)!.txt_menu4, style: const TextStyle(fontFamily: 'Candara')),
-                    ),
-                    PopupMenuItem<String>(
-                      value: "4",
-                      child: Text(AppLocalizations.of(context)!.txt_menu5, style: const TextStyle(fontFamily: 'Candara')),
-                    )
-                  ],
-                ),
+                 FeaturesTour(
+                    controller: tourController,
+                    index: 0,
+                    nextConfig: NextConfig(text: AppLocalizations.of(context)!.txt_tour_bt1, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                    skipConfig: SkipConfig(text: AppLocalizations.of(context)!.txt_tour_bt4, textStyle: TextStyle(color: Setting.vertColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                    doneConfig: DoneConfig (text: AppLocalizations.of(context)!.txt_tour_bt3, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                    introduce:  Text(AppLocalizations.of(context)!.txt_tour1_desc, style: TextStyle(color: Setting.white, fontFamily: 'Candara', fontWeight: FontWeight.bold),),
+                    child: PopupMenuButton<String>(
+                          // Callback that sets the selected popup menu item.
+                          onSelected: (String item) {
+                            if(item == "1") {
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => BookmarksScreen()));
+                            }
+                            else if(item == "2") {
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => AccountScreen()));
+                            }
+                            else if(item == "3") {
+                              version(context);
+                            }
+                            else if(item == "4") {
+                            deconnexion(context, ref);
+                            }
+                          },
+                          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                            PopupMenuItem<String>(
+                              value: "1",
+                              child: Text(AppLocalizations.of(context)!.txt_menu2, style: const TextStyle(fontFamily: 'Candara')),
+                            ),
+                            PopupMenuItem<String>(
+                              value: "2",
+                              child: Text(AppLocalizations.of(context)!.txt_menu3, style: const TextStyle(fontFamily: 'Candara')),
+                            ),
+                            PopupMenuItem<String>(
+                              value: "3",
+                              child: Text(AppLocalizations.of(context)!.txt_menu4, style: const TextStyle(fontFamily: 'Candara')),
+                            ),
+                            PopupMenuItem<String>(
+                              value: "4",
+                              child: Text(AppLocalizations.of(context)!.txt_menu5, style: const TextStyle(fontFamily: 'Candara')),
+                            )
+                          ],
+                        ),
+                  ),
+                
               ],
         ),
       body: Stack(
@@ -189,22 +212,47 @@ class DashbordScreenState extends ConsumerState<DashbordScreen> {
                     childAspectRatio: (3/4),
                     crossAxisCount: 2,
                     children: <Widget>[
-                      DashbordBloc(texte: AppLocalizations.of(context)!.txt_bloc1, image: Image.asset('img/img1.png',fit: BoxFit.contain,alignment: Alignment.topCenter), onTap: () { Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(builder: (_) => FindRecipeScreen()),
-                                                    ); },),
-                      DashbordBloc(texte: AppLocalizations.of(context)!.txt_bloc2, image: Image.asset('img/img2.png',fit: BoxFit.contain,alignment: Alignment.topCenter), onTap: () { Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(builder: (_) => AskRecipeScreen()),
-                                                    ); },),
-                      DashbordBloc(texte: AppLocalizations.of(context)!.txt_bloc3, image: Image.asset('img/img3.png',fit: BoxFit.contain,alignment: Alignment.topCenter), onTap: () { Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(builder: (_) => SearchAllergiesScreen()),
-                                                    ); },),
-                      DashbordBloc(texte: AppLocalizations.of(context)!.txt_bloc4, image: Image.asset('img/img4.png',fit: BoxFit.contain,alignment: Alignment.topCenter), onTap: () { Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(builder: (_) => GenerateRecipeScreen()),
-                                                    ); },),
+
+                      FeaturesTour(
+                        controller: tourController,
+                        index: 1,
+                        nextConfig: NextConfig(text: AppLocalizations.of(context)!.txt_tour_bt1, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        skipConfig: SkipConfig(text: AppLocalizations.of(context)!.txt_tour_bt4, textStyle: TextStyle(color: Setting.vertColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        doneConfig: DoneConfig (text: AppLocalizations.of(context)!.txt_tour_bt3, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        introduce:  Text(AppLocalizations.of(context)!.txt_tour2_desc, style: TextStyle(color: Setting.white, fontFamily: 'Candara', fontWeight: FontWeight.bold),),
+                        child: DashbordBloc(texte: AppLocalizations.of(context)!.txt_bloc1, image: Image.asset('img/img1.png',fit: BoxFit.contain,alignment: Alignment.topCenter), onTap: () { Navigator.push(context,MaterialPageRoute(builder: (_) => FindRecipeScreen()), ); },),
+                      ),
+
+                      FeaturesTour(
+                        controller: tourController,
+                        index: 2,
+                        nextConfig: NextConfig(text: AppLocalizations.of(context)!.txt_tour_bt1, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        skipConfig: SkipConfig(text: AppLocalizations.of(context)!.txt_tour_bt4, textStyle: TextStyle(color: Setting.vertColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        doneConfig: DoneConfig (text: AppLocalizations.of(context)!.txt_tour_bt3, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        introduce: Text(AppLocalizations.of(context)!.txt_tour3_desc, style: TextStyle(color: Setting.white, fontFamily: 'Candara', fontWeight: FontWeight.bold),),
+                        child: DashbordBloc(texte: AppLocalizations.of(context)!.txt_bloc2, image: Image.asset('img/img2.png',fit: BoxFit.contain,alignment: Alignment.topCenter), onTap: () { Navigator.push(context,MaterialPageRoute(builder: (_) => AskRecipeScreen()), ); },),
+                      ),
+
+                      FeaturesTour(
+                        controller: tourController,
+                        index: 3,
+                        nextConfig: NextConfig(text: AppLocalizations.of(context)!.txt_tour_bt1, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        skipConfig: SkipConfig(text: AppLocalizations.of(context)!.txt_tour_bt4, textStyle: TextStyle(color: Setting.vertColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        doneConfig: DoneConfig (text: AppLocalizations.of(context)!.txt_tour_bt3, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        introduce:  Text(AppLocalizations.of(context)!.txt_tour4_desc, style: TextStyle(color: Setting.white, fontFamily: 'Candara', fontWeight: FontWeight.bold),),
+                        child: DashbordBloc(texte: AppLocalizations.of(context)!.txt_bloc3, image: Image.asset('img/img3.png',fit: BoxFit.contain,alignment: Alignment.topCenter), onTap: () { Navigator.push(context, MaterialPageRoute(builder: (_) => SearchAllergiesScreen()),  ); },),
+                      ),
+
+                      FeaturesTour(
+                        controller: tourController,
+                        index: 4,
+                        nextConfig: NextConfig(text: AppLocalizations.of(context)!.txt_tour_bt1, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        skipConfig: SkipConfig(text: AppLocalizations.of(context)!.txt_tour_bt4, textStyle: TextStyle(color: Setting.vertColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        doneConfig: DoneConfig (text: AppLocalizations.of(context)!.txt_tour_bt3, textStyle: TextStyle(color: Setting.primaryColor, fontFamily: 'Candara', fontWeight: FontWeight.bold) ),
+                        introduce:  Text(AppLocalizations.of(context)!.txt_tour5_desc, style: TextStyle(color: Setting.white, fontFamily: 'Candara', fontWeight: FontWeight.bold),),
+                        child: DashbordBloc(texte: AppLocalizations.of(context)!.txt_bloc4, image: Image.asset('img/img4.png',fit: BoxFit.contain,alignment: Alignment.topCenter), onTap: () { Navigator.push(context,MaterialPageRoute(builder: (_) => GenerateRecipeScreen()), ); },),
+                      ),
+
                     ],
                   )
             ),

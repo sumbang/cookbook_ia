@@ -83,6 +83,10 @@ class Setting {
         return AppLocalizations.of(context)!.user_signout;
       case "txt_save":
         return AppLocalizations.of(context)!.txt_save;
+      case "txt_allergie_requis":
+        return AppLocalizations.of(context)!.txt_allergie_requis;
+      case "txt_preference_requis":
+        return AppLocalizations.of(context)!.txt_preference_requis;
       default: return "";   
       
       }

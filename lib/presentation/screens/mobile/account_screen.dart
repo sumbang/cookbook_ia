@@ -4,7 +4,6 @@ import 'package:cookbook_ia/domain/entities/account.dart';
 import 'package:cookbook_ia/domain/entities/message.dart';
 import 'package:cookbook_ia/presentation/components/view_models/app_view_model.dart';
 import 'package:cookbook_ia/presentation/components/widgets/bouton.dart';
-import 'package:cookbook_ia/presentation/components/widgets/dropdown.dart';
 import 'package:cookbook_ia/presentation/components/widgets/input.dart';
 import 'package:cookbook_ia/presentation/components/widgets/textarea.dart';
 import 'package:cookbook_ia/presentation/screens/mobile/dashbord_screen.dart';
@@ -180,7 +179,7 @@ class AccountScreenState extends ConsumerState<AccountScreen> {
                                           const SizedBox(
                                             height: 10.0,
                                           ),
-                                          Dropdown(background: Setting.gris, controller: accountPreferenceController, icon: const Icon(Icons.food_bank_sharp,color: Setting.primaryColor ), label: '${AppLocalizations.of(context)!.txt_gastro} ', types: 1, enabled: true,),
+                                          Textarea(background: Setting.gris, controller: accountPreferenceController, icon: const Icon(Icons.sick,color: Setting.primaryColor ), label:'${AppLocalizations.of(context)!.txt_gastro} ',),
                                           const SizedBox(
                                             height: 10.0,
                                           ),

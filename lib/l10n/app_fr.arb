@@ -75,7 +75,7 @@
  "logout_op2": "Non",
  "txt_context": "Saisir vos précisions ici",
  "txt_alergies": "Liste de vos allergies alimentaires",
- "txt_gastro": "Votre préférence gastronomique",
+ "txt_gastro": "Liste de vos préférences gastronomique, ex: Cuisine africaines...",
  "txt_save": "Opération réussie",
  "txt_cuisine1": "Cuisine asiatique",
  "txt_cuisine2": "Cuisine européenne",
@@ -100,5 +100,17 @@
  "txt_share": "Partager",
  "txt_close": "Voulez-vous vraiment quitter cette page ?",
  "txt_aliment": "Aliment : ",
- "txt_prob": "Probalité de présence : "
+ "txt_prob": "Probalité de présence : ",
+ "txt_tour1_desc": "Retrouver ici les menu pour voir l'ensemble des recettes que vous enregistrez, gérer votre compte (Modifier votre nom, gérer vos allergies et définir vos préférences culinaires), se déconnecter de l'application",
+ "txt_tour2_desc": "Fournisser une image d'un plat et vous obtiendrez diverses façon de réaliser ce plat",
+ "txt_tour3_desc": "Fournisser une liste d'aliments et vous obtiendrez diverses recettes que l'on peut faire avec ses aliments",
+ "txt_tour4_desc": "Fournisser une image d'un plat et sur la base des allergies que vous avez déclaré, on vous dira si le plat est sain pour vous",
+ "txt_tour5_desc": "Fournisser une idée de ce que vous souhaitez cuisiner, vous obtiendrez diverses recettes allant dans ce sens",
+ "txt_tour_bt1": "Suivant",
+ "txt_tour_bt2": "Précédent", 
+ "txt_tour_bt3": "Terminer", 
+ "txt_tour_bt4": "Ignorer", 
+ "txt_allergie_requis": "Veuillez définir vos allergies via le menu principale",
+ "txt_preference_requis": "Veuillez définir vos préférences culinaires via le menu principale"
+
 }
