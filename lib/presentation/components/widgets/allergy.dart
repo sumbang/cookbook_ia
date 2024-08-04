@@ -16,9 +16,10 @@ class Allergy extends StatelessWidget {
               padding: const EdgeInsets.all(2.0),
               child:  Container(
                 width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   color: Setting.white,
-                  border: Border.all(color: Setting.white),
+                  border: Border.all(color: Setting.primaryColor),
                   borderRadius: const BorderRadius.all(Radius.circular(5.0)),
                 ),
                 child: Column(
@@ -29,27 +30,24 @@ class Allergy extends StatelessWidget {
                       Row(children: [
                         Expanded(flex: 1, child:   Padding(
                          padding: const EdgeInsets.only(top: 2, left: 5, right: 5, bottom:10),
-                         child: Align(alignment: Alignment.centerLeft, child: Text(AppLocalizations.of(context)!.txt_aliment, style: const TextStyle( color: Setting.marron,fontFamily: 'Candara', fontWeight: FontWeight.bold, fontSize: 20.0),textAlign: TextAlign.left,)),
+                         child: Align(alignment: Alignment.centerLeft, child: Text(AppLocalizations.of(context)!.txt_aliment, style: const TextStyle( color: Setting.marron,fontFamily: 'Candara', fontWeight: FontWeight.bold, fontSize: 18.0),textAlign: TextAlign.left,)),
                         )),
 
-                        Expanded(flex: 1, child:  Padding(
+                        Expanded(flex: 2, child:  Padding(
                          padding: const EdgeInsets.only(top: 2, left: 5, right: 5, bottom:10),
-                         child: Align(alignment: Alignment.centerLeft, child: Text(allergie.name, style: const TextStyle( color: Colors.black,fontFamily: 'Candara', fontWeight: FontWeight.normal, fontSize: 20.0),textAlign: TextAlign.left,)),
+                         child: Align(alignment: Alignment.centerLeft, child: Text(allergie.name, style: const TextStyle( color: Colors.black,fontFamily: 'Candara', fontWeight: FontWeight.normal, fontSize: 18.0),textAlign: TextAlign.left,)),
                         ))
                        ],),
 
-                        const SizedBox(height: 10,),
-
-
                       Row(children: [
-                        Expanded(flex: 1, child:   Padding(
+                        Expanded(flex: 2, child:   Padding(
                          padding: const EdgeInsets.only(top: 2, left: 5, right: 5, bottom:10),
-                         child: Align(alignment: Alignment.centerLeft, child: Text(AppLocalizations.of(context)!.txt_alergies, style: const TextStyle( color: Setting.marron,fontFamily: 'Candara', fontWeight: FontWeight.bold, fontSize: 20.0),textAlign: TextAlign.left,)),
+                         child: Align(alignment: Alignment.centerLeft, child: Text(AppLocalizations.of(context)!.txt_prob, style: const TextStyle( color: Setting.marron,fontFamily: 'Candara', fontWeight: FontWeight.bold, fontSize: 18.0),textAlign: TextAlign.left,)),
                         )),
 
                         Expanded(flex: 1, child:  Padding(
                          padding: const EdgeInsets.only(top: 2, left: 5, right: 5, bottom:10),
-                         child: Align(alignment: Alignment.centerLeft, child: Text(allergie.percent, style: const TextStyle( color: Colors.black,fontFamily: 'Candara', fontWeight: FontWeight.normal, fontSize: 20.0),textAlign: TextAlign.left,)),
+                         child: Align(alignment: Alignment.centerLeft, child: Text(allergie.percent, style: const TextStyle( color: Colors.black,fontFamily: 'Candara', fontWeight: FontWeight.normal, fontSize: 18.0),textAlign: TextAlign.left,)),
                         ))
                        ],),
 

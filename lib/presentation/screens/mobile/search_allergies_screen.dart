@@ -83,13 +83,13 @@ class SearchAllergiesScreenState extends ConsumerState<SearchAllergiesScreen> {
           });
         });
 
-        promptRequest.replaceAll("@param_allergie",allergies);
+        String request = promptRequest.replaceAll("@param_allergie",allergies);
 
         if(detail)  {
-          promptRequest = promptRequest + " "+contextController.text.toString();
+          request = request + " "+contextController.text.toString();
         }
 
-        final prompt = TextPart(promptRequest);
+        final prompt = TextPart(request);
         final imageParts = [
           DataPart('image/jpeg', fichier),
         ];
