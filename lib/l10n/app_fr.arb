@@ -107,7 +107,7 @@
  "txt_tour4_desc": "Fournisser une image d'un plat et sur la base des allergies que vous avez déclaré, on vous dira si le plat est sain pour vous",
  "txt_tour5_desc": "Fournisser une idée de ce que vous souhaitez cuisiner, vous obtiendrez diverses recettes allant dans ce sens",
  "txt_tour_bt1": "Suivant",
- "txt_tour_bt2": "Précédent", 
+ "txt_tour_bt2": "Précédent",
  "txt_tour_bt3": "Terminer", 
  "txt_tour_bt4": "Ignorer", 
  "txt_allergie_requis": "Veuillez définir vos allergies via le menu principale",
