@@ -144,7 +144,9 @@ class DashbordScreenState extends ConsumerState<DashbordScreen> {
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
+      return PopScope(
+     canPop: false, 
+      child: Scaffold(
       backgroundColor: Setting.white,
              appBar: AppBar(
               title: const Text( "",  style: TextStyle(color: Colors.black), ),
@@ -308,7 +310,7 @@ class DashbordScreenState extends ConsumerState<DashbordScreen> {
                           ),
                         ) 
         ])
-      );
+      ));
   }
 
 }

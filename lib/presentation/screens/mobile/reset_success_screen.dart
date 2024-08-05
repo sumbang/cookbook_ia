@@ -13,7 +13,9 @@ class ResetSuccessScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     
-     return Scaffold(
+     return PopScope(
+     canPop: false, 
+      child: Scaffold(
       backgroundColor: Setting.white,
         appBar: AppBar(
               title: const Text( "",  style: TextStyle(color: Colors.white), ),
@@ -69,6 +71,6 @@ class ResetSuccessScreen extends HookConsumerWidget {
         )
       )
       )
-     );
+     ));
   }
 }

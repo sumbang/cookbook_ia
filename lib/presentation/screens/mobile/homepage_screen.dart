@@ -190,7 +190,9 @@ class HomePageScreenState extends ConsumerState<HomePageScreen> {
   @override
   Widget build(BuildContext context) {
       final viewModelState = ref.watch(passwordViewModelProvider);
-      return Scaffold(
+      return PopScope(
+     canPop: false, 
+      child: Scaffold(
       backgroundColor: Setting.white,
       body: Stack(
         children: <Widget>[
@@ -312,7 +314,7 @@ class HomePageScreenState extends ConsumerState<HomePageScreen> {
                           ),
                         ) 
         ],
-      ));
+      )));
             
   }
     

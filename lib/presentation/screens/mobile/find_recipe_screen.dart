@@ -79,72 +79,94 @@ class FindRecipeScreenState extends ConsumerState<FindRecipeScreen> {
       promptRequest = promptRequest + " "+contextController.text.toString();
     }
 
-    final prompt = TextPart(promptRequest);
-    final imageParts = [
-      DataPart('image/jpeg', fichier),
-    ];
-    final response = await model!.generateContent([
-      Content.multi([prompt, ...imageParts])
-    ]);
+    try {
 
-    if(Setting.isValidJson(response.text!)) {
+        final prompt = TextPart(promptRequest);
+        final imageParts = [
+          DataPart('image/jpeg', fichier),
+        ];
+        final response = await model!.generateContent([
+          Content.multi([prompt, ...imageParts])
+        ]);
 
-        final PromptResponse promptResponse = PromptResponse.fromJson(json.decode(response.text!));
+        if(Setting.isValidJson(response.text!)) {
 
-        pr.hide().then((isHidden) {
-                  print(isHidden);
-        });
+            final PromptResponse promptResponse = PromptResponse.fromJson(json.decode(response.text!));
 
-        if(promptResponse.status == "2") {
-
-            List<AlerteAction> alertes = [];
-            alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
-
-            AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
-              description: promptResponse.message,
-              actions: alertes
-            );
-      
-        } else if(promptResponse.status == "3") {
-
-            List<AlerteAction> alertes = [];
-            alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
-
-            AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
-                description: promptResponse.message,
-                actions: alertes
-            );
-
-            setState(() {
-                  detail = true;
+            pr.hide().then((isHidden) {
+                      print(isHidden);
             });
+
+            if(promptResponse.status == "2") {
+
+                List<AlerteAction> alertes = [];
+                alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
+
+                AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
+                  description: promptResponse.message,
+                  actions: alertes
+                );
+          
+            } else if(promptResponse.status == "3") {
+
+                List<AlerteAction> alertes = [];
+                alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
+
+                AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
+                    description: promptResponse.message,
+                    actions: alertes
+                );
+
+                setState(() {
+                      detail = true;
+                });
+
+            } else {
+
+                Navigator.push(context,
+                    MaterialPageRoute(
+                      builder: (_) => IaGeneratorRecipesScreen(promptResponse.content)),
+                );
+
+            }
 
         } else {
 
-            Navigator.push(context,
-                MaterialPageRoute(
-                  builder: (_) => IaGeneratorRecipesScreen(promptResponse.content)),
+            pr.hide().then((isHidden) {
+                      print(isHidden);
+            });
+
+            List<AlerteAction> alertes = [];
+            alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
+
+            AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
+                  description: AppLocalizations.of(context)!.error_title,
+                  actions: alertes
             );
+
+        } 
+    
+    } catch(e) {
+
+           pr.hide().then((isHidden) {
+                      print(isHidden);
+                    });
+
+                  Fluttertoast.showToast(
+                  msg: AppLocalizations.of(context)!.error_title,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
 
         }
 
-    } else {
-
-        pr.hide().then((isHidden) {
-                  print(isHidden);
-        });
-
-        List<AlerteAction> alertes = [];
-        alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
-
-        AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
-              description: AppLocalizations.of(context)!.error_title,
-              actions: alertes
-        );
-
     }
 
-    }
+    
 
   }
 
