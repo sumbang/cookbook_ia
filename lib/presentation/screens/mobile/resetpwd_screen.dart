@@ -5,6 +5,7 @@ import 'package:cookbook_ia/presentation/components/view_models/app_view_model.d
 import 'package:cookbook_ia/presentation/components/widgets/bouton.dart';
 import 'package:cookbook_ia/presentation/components/widgets/input.dart';
 import 'package:cookbook_ia/presentation/screens/mobile/homepage_screen.dart';
+import 'package:cookbook_ia/presentation/screens/mobile/reset_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -69,7 +70,7 @@ class ResetpwdScreenState extends ConsumerState<ResetpwdScreen> {
 
         Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => HomePageScreen()),
+                      MaterialPageRoute(builder: (_) => ResetSuccessScreen()),
                     );
 
       }).catchError((e) {

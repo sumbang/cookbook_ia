@@ -108,47 +108,63 @@ class SearchAllergiesScreenState extends ConsumerState<SearchAllergiesScreen> {
         final response = await model!.generateContent([
           Content.multi([prompt, ...imageParts])
         ]);
-        
-        final PromptResponseAllergy promptResponse = PromptResponseAllergy.fromJson(json.decode(response.text!));
 
-        pr.hide().then((isHidden) {
-              print(isHidden);
-        });
+        if(Setting.isValidJson(response.text!)) {
 
-        if(promptResponse.status == "2") {
+            final PromptResponseAllergy promptResponse = PromptResponseAllergy.fromJson(json.decode(response.text!));
 
-            List<AlerteAction> alertes = [];
-            alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
-
-            AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
-              description: promptResponse.message,
-              actions: alertes
-            );
-      
-        } else if(promptResponse.status == "3") {
-
-            List<AlerteAction> alertes = [];
-            alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
-
-            AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
-                description: promptResponse.message,
-                actions: alertes
-            );
-
-            setState(() {
-                  detail = true;
+            pr.hide().then((isHidden) {
+                  print(isHidden);
             });
 
-        } else {
+            if(promptResponse.status == "2") {
 
-            Navigator.push(context,
-                MaterialPageRoute(
-                  builder: (_) => IaGeneratorAllergiesScreen(promptResponse.content)),
-            );
+                List<AlerteAction> alertes = [];
+                alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
 
-        }
+                AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
+                  description: promptResponse.message,
+                  actions: alertes
+                );
+          
+            } else if(promptResponse.status == "3") {
 
+                List<AlerteAction> alertes = [];
+                alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
 
+                AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
+                    description: promptResponse.message,
+                    actions: alertes
+                );
+
+                setState(() {
+                      detail = true;
+                });
+
+            } else {
+
+                Navigator.push(context,
+                    MaterialPageRoute(
+                      builder: (_) => IaGeneratorAllergiesScreen(promptResponse.content)),
+                );
+
+            }
+            
+        }  else {
+
+          pr.hide().then((isHidden) {
+                    print(isHidden);
+          });
+
+          List<AlerteAction> alertes = [];
+          alertes.add(AlerteAction(label:AppLocalizations.of(context)!.error_title, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
+
+          AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
+                description: AppLocalizations.of(context)!.txt_bloc1,
+                actions: alertes
+          );
+
+    }
     }
 
   }

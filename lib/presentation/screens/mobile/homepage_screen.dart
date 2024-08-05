@@ -12,6 +12,7 @@ import 'package:cookbook_ia/presentation/components/widgets/input.dart';
 import 'package:cookbook_ia/presentation/components/widgets/password.dart';
 import 'package:cookbook_ia/presentation/screens/mobile/dashbord_screen.dart';
 import 'package:cookbook_ia/presentation/screens/mobile/resetpwd_screen.dart';
+import 'package:cookbook_ia/presentation/screens/mobile/signup_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -89,7 +90,7 @@ class HomePageScreenState extends ConsumerState<HomePageScreen> {
 
         Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => HomePageScreen()),
+                      MaterialPageRoute(builder: (_) => SignupSuccessScreen()),
                     );
 
       }).catchError((e) {

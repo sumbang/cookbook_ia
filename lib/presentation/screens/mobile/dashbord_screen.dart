@@ -69,6 +69,7 @@ class DashbordScreenState extends ConsumerState<DashbordScreen> {
         prefs.remove('username');
         prefs.remove('fullname');
         prefs.remove('id');
+        prefs.remove("tour");
 
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomePageScreen()));
 
@@ -202,7 +203,7 @@ class DashbordScreenState extends ConsumerState<DashbordScreen> {
         children: <Widget>[
             Container(
                 height: MediaQuery.of(context).size.height,
-                margin: EdgeInsets.only(top : 13 * SizeConfig.heightMultiplier,),
+                margin: EdgeInsets.only(top : 13 * SizeConfig.heightMultiplier, bottom: 50),
                 child: GridView.count(
                     primary: false,
                     padding: const EdgeInsets.all(20),
@@ -256,6 +257,28 @@ class DashbordScreenState extends ConsumerState<DashbordScreen> {
                     ],
                   )
             ),
+
+            Positioned(
+              bottom: 0.0,
+              child:  Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text(Setting.versionName,
+                                                  textAlign: TextAlign.center,
+                                                  style: new TextStyle(
+                                                  fontFamily: 'Candara',
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 12.0,
+                                                  color: Setting.black),
+                                            ),
+                                            SizedBox(height: 20.0),
+                                        ]),
+                          ),
+            ),
+
             Positioned(
                 top: 0.0,
                 child: Align(

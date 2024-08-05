@@ -59,7 +59,7 @@ class Database {
         await FirebaseAuth.instance.sendPasswordResetEmail(
           email: request.username,
         );
-        return new MessageResponse(message: 'reset_sent');
+        return new MessageResponse(message: 'txt_save');
 
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {

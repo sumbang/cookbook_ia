@@ -65,7 +65,7 @@
  "weak_password": "The password provided is too weak",
  "user_disabled": "Account disabled",
  "user_not_found": "User not found",
- "reset_sent": "Reset password email sent",
+ "reset_sent": "Operation successful. A password reset email has been sent to you",
  "invalid_credential": "Invalid credential",
  "email_verified": "Your account is not yet validated, we have just sent you a validation link",
  "user_signout": "Logout successfull",
@@ -101,7 +101,7 @@
  "txt_close": "Are you sure you want to leave this page ?", 
  "txt_aliment": "Aliment : ",
  "txt_prob": "Probability of presence : ",
- "txt_tour1_desc": "Find here the menus to see all the recipes you save, manage your account (Change your name, manage your allergies and define your culinary preferences), log out of the application",
+ "txt_tour1_desc": "Here is the main menu, you will find the menu to see all the recipes that you save, manage your account (Change your name, manage your allergies and define your culinary preferences) and log out of the application",
  "txt_tour2_desc": "Provide an image of a dish and you will get various ways to make this dish",
  "txt_tour3_desc": "Provide a list of foods and you will get various recipes that can be made with these foods",
  "txt_tour4_desc": "Provide an image of a dish and based on the allergies you have declared, you will be told if the dish is healthy for you",
@@ -111,5 +111,8 @@
  "txt_tour_bt3": "Done",
  "txt_tour_bt4": "Skip",
  "txt_allergie_requis": "Please set your allergies via the main menu",
- "txt_preference_requis": "Please set your culinary preferences via the main menu"
+ "txt_preference_requis": "Please set your culinary preferences via the main menu",
+ "txt_signup_desc": "Your account has been successfully created.\n\rYou have received a link by email to activate it, once this is done, you will be able to log in.",
+ "error_title": "Oops, an error occurred while processing your request. Please, retry",
+ "no_internet": "No Internet connection!!"
 }

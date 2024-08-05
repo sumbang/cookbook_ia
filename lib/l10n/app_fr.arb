@@ -65,7 +65,7 @@
  "weak_password": "Le mot de passe est très faible",
  "user_disabled": "Compte désactivé",
  "user_not_found": "Utilisateur non trouvé",
- "reset_sent": "Mail de réinitialisation du mot de passe envoyé",
+ "reset_sent": "Opération réussie. un mail de réinitialisation du mot de passe vous a été envoyé",
  "invalid_credential": "Login ou mot de passe incorrect",
  "email_verified": "Votre compte n'est pas encore validé, nous venons de vous renvoyer un lien de validation",
  "user_signout": "Déconnexion réussie",  
@@ -101,7 +101,7 @@
  "txt_close": "Voulez-vous vraiment quitter cette page ?",
  "txt_aliment": "Aliment : ",
  "txt_prob": "Probalité de présence : ",
- "txt_tour1_desc": "Retrouver ici les menu pour voir l'ensemble des recettes que vous enregistrez, gérer votre compte (Modifier votre nom, gérer vos allergies et définir vos préférences culinaires), se déconnecter de l'application",
+ "txt_tour1_desc": "Ici c'est le menu principal, vous y retrouver les menu pour voir l'ensemble des recettes que vous enregistrez, gérer votre compte (Modifier votre nom, gérer vos allergies et définir vos préférences culinaires) et se déconnecter de l'application",
  "txt_tour2_desc": "Fournisser une image d'un plat et vous obtiendrez diverses façon de réaliser ce plat",
  "txt_tour3_desc": "Fournisser une liste d'aliments et vous obtiendrez diverses recettes que l'on peut faire avec ses aliments",
  "txt_tour4_desc": "Fournisser une image d'un plat et sur la base des allergies que vous avez déclaré, on vous dira si le plat est sain pour vous",
@@ -111,6 +111,9 @@
  "txt_tour_bt3": "Terminer", 
  "txt_tour_bt4": "Ignorer", 
  "txt_allergie_requis": "Veuillez définir vos allergies via le menu principale",
- "txt_preference_requis": "Veuillez définir vos préférences culinaires via le menu principale"
+ "txt_preference_requis": "Veuillez définir vos préférences culinaires via le menu principale",
+ "txt_signup_desc": "Votre compte a été crée avec succès.\n\rVous avez reçu par mail un lien pour l'activer, une fois cela fait, vous pourrez vous connecter.",
+ "error_title": "Oups, une erreur est survenue durant le traitement de votre requête. Veuillez recommencer",
+ "no_internet": "Pas de connexion internet!"
 
 }

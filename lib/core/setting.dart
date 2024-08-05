@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Setting {
 
-  static const String appName = 'CookBookIA';
+  static const String appName = 'CookBook IA';
   static const String currenversion = '1.0.0';
   static const String plateformeMobile = '1';
   static const String plateformeWeb = '2';
@@ -13,9 +14,9 @@ class Setting {
   static const mobileWidth = 600;
   static const desktopWidth = 1400;
 
-  static const versionName = 'Version 1.0.0 - © 2024 CookBookIA';
+  static const versionName = 'Version 1.0.0 - © 2024 CookBook IA';
 
-  static const String apikey = 'AIzaSyA8ljP0QzyGuKNLsn9CNLF8qliANPtA_X8';
+  static const String apikey = String.fromEnvironment("API_KEY");
 
   static String generateRandomString(int len) {
     var r = Random();
@@ -90,6 +91,15 @@ class Setting {
       default: return "";   
       
       }
+  }
+
+  static bool isValidJson(String data) {
+    try {
+      json.decode(data);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
  
