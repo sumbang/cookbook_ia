@@ -157,10 +157,10 @@ class AskRecipeScreenState extends ConsumerState<AskRecipeScreen> {
             });
 
             List<AlerteAction> alertes = [];
-            alertes.add(AlerteAction(label:AppLocalizations.of(context)!.error_title, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
+            alertes.add(AlerteAction(label:AppLocalizations.of(context)!.ok_bt, onTap:(){  Navigator.of(context, rootNavigator: true).pop('dialog'); } ));
 
             AlerteBox(context: context, title: AppLocalizations.of(context)!.txt_menu6,
-                  description: AppLocalizations.of(context)!.txt_bloc1,
+                  description: AppLocalizations.of(context)!.error_title,
                   actions: alertes
             );
 
